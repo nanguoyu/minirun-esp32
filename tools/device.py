@@ -1,18 +1,32 @@
 """USB client. Text tokenization stays on Mac; STEP executes the model on ESP32."""
-import argparse, pathlib, re, struct, time
+import argparse, os, pathlib, re, struct, time
+from serial.tools import list_ports
 import serial
 from fetch_lfm import ROOT, verify, verify_aligned
 
+def resolve_port(port=None):
+    if port or os.environ.get('MINIRUN_PORT'):
+        return port or os.environ['MINIRUN_PORT']
+    matches = [p.device for p in list_ports.comports() if (p.vid, p.pid) == (0x303A, 0x1001)]
+    if len(matches) == 1:
+        return matches[0]
+    if not matches:
+        raise ValueError('No ESP32-S3 USB serial device found. Connect the board, or pass --port PORT.')
+    raise ValueError('More than one ESP32-S3 is connected. Choose one with --port PORT.')
+
 class Device:
-    def __init__(self, port):
-        self.s=serial.Serial(port,115200,timeout=1,write_timeout=30)
+    def __init__(self, port=None, verbose=True, on_line=None):
+        self.verbose=verbose
+        self.on_line=on_line
+        self.s=serial.Serial(resolve_port(port),115200,timeout=1,write_timeout=30)
     def line(self, deadline=120):
         end=time.monotonic()+deadline
         while time.monotonic()<end:
             line=self.s.readline()
             if line:
                 text=line.decode(errors='replace').strip()
-                print(text,flush=True)
+                if self.verbose:print(text,flush=True)
+                if self.on_line:self.on_line(text)
                 if text.startswith('ERROR'):raise RuntimeError(text)
                 return text
         raise TimeoutError('device silent')
@@ -27,7 +41,7 @@ class Device:
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--port',required=True)
+    p.add_argument('--port',help='USB serial port; detected automatically when one ESP32-S3 is connected')
     p.add_argument('--aligned',action='store_true',help='Upload the derived 4096-byte-aligned GGUF')
     p.add_argument('action',choices=['info','upload','run','test-tx'])
     p.add_argument('--tokens',type=int,nargs='+')
@@ -37,7 +51,8 @@ if __name__=='__main__':
     a=p.parse_args()
     if a.action=='run' and (not a.tokens or len(a.tokens)>1024 or any(t<0 or t>=65536 for t in a.tokens)):
         p.error('run needs 1..1024 token IDs, each in 0..65535')
-    d=Device(a.port)
+    try:d=Device(a.port)
+    except (ValueError,serial.SerialException) as error:p.exit(1,str(error)+'\n')
     try:
         d.command('INFO');info=d.until('READY LFM230')
         capacity_match=re.search(r' context=(\d+)',info)
