@@ -1,0 +1,20 @@
+name: Something is not working
+description: Help us understand what happened on your setup.
+body:
+  - type: textarea
+    attributes:
+      label: What happened?
+      description: What did you run, and what did you expect to see?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Your setup
+      description: Board, PSRAM, SD card and wiring, computer OS, ESP-IDF version.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Error or short log
+      description: Remove device serial numbers and personal paths before posting.
+      render: text

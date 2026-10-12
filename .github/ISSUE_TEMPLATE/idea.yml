@@ -1,0 +1,12 @@
+name: An idea or a board port
+description: A useful change, a different screen, or a board you want to try.
+body:
+  - type: textarea
+    attributes:
+      label: What would you like to try?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Hardware or other details
+      description: A pin map is especially helpful for another board.
