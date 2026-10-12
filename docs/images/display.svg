@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="320" viewBox="0 0 720 320" role="img" aria-labelledby="title desc">
+<title id="title">Minirun for ESP32</title>
+<desc id="desc">Illustration of the LCD showing a real generated greeting. LFM2.5-230M runs on an ESP32-S3 with 8 MiB of PSRAM and an SD card.</desc>
+<rect width="720" height="320" rx="18" fill="#0d151b"/>
+<rect x="30" y="24" width="270" height="272" rx="15" fill="#172b2b" stroke="#2c4546"/>
+<circle cx="42" cy="36" r="3" fill="#aebcaf"/><circle cx="288" cy="36" r="3" fill="#aebcaf"/>
+<circle cx="42" cy="284" r="3" fill="#aebcaf"/><circle cx="288" cy="284" r="3" fill="#aebcaf"/>
+<rect x="45" y="40" width="240" height="240" rx="4" fill="#081018"/>
+<g font-family="ui-monospace, Menlo, Consolas, monospace">
+<text x="57" y="65" fill="#67e8df" font-size="18" font-weight="700">MINIRUN</text>
+<text x="57" y="84" fill="#b9c8cd" font-size="11">LFM2.5-230M / SD</text>
+<text x="57" y="119" fill="#ffffff" font-size="14">You: Hello!</text>
+<text x="57" y="158" fill="#ffffff" font-size="14">Hello! How can I help</text>
+<text x="57" y="179" fill="#ffffff" font-size="14">you today?</text>
+<text x="57" y="233" fill="#67e8df" font-size="11">TOKEN READY</text>
+<rect x="57" y="244" width="216" height="3" fill="#9ce980"/>
+<text x="57" y="264" fill="#e4ce87" font-size="11">DONE</text>
+</g>
+<g font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">
+<text x="335" y="75" fill="#8ca3ad" font-size="13" letter-spacing="2">MINIRUN FOR ESP32</text>
+<text x="335" y="118" fill="#f1f6f5" font-size="29" font-weight="650">230M parameters.</text>
+<text x="335" y="157" fill="#f1f6f5" font-size="29" font-weight="650">8 MiB of PSRAM.</text>
+<path d="M335 186 H680" stroke="#2c3b43"/>
+<text x="335" y="218" fill="#b9c8cd" font-size="17">The SD card holds the model.</text>
+<text x="335" y="245" fill="#b9c8cd" font-size="17">The ESP32 does the math.</text>
+</g>
+</svg>

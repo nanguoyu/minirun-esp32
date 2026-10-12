@@ -69,4 +69,4 @@ Keep the original output as a comparison when changing arithmetic or scheduling.
 
 The text helper uses llama.cpp commit `956973c76466b6c791d7bdbe6eed3aa3235b2dc1`. Setup fetches it directly from the public project. The firmware uses ESP-IDF 5.5.4. Model revision and hashes live in `models/lfm230-artifact.json` and `models/lfm230-aligned-artifact.json`.
 
-The C runtime originated in the private development snapshot `aad1438fcd565f27972c5e47269b90912a9d31ee`. Its model and firmware C files are unchanged in the initial public import `a8b5340`; later commits show the release work. Historical device measurements refer to that runtime. The private repository's logs and device identifiers are not required to build or use this project.
+The first public import, `a8b5340`, contains the model and firmware C code used for the September device runs. Later commits show the installation and interface changes for this release.
