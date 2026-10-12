@@ -4,6 +4,8 @@ A 230M language model, an SD card, and an ESP32-S3.
 
 [Get started](docs/getting-started.md) · [Hardware](docs/hardware.md) · [How it works](docs/how-it-works.md) · [中文](README.zh-CN.md)
 
+[Minirun](https://minirun.dev) runs models larger than memory. The [Mac and iPhone app](https://github.com/nanguoyu/minirun-app) reads model weights from an SSD. **This project brings the same idea to an ESP32-S3 and an SD card**, with its own firmware and a Python USB chat client.
+
 Minirun runs **LFM2.5-230M on the ESP32-S3 itself**. The model lives on an SD card. The board reads small pieces of it as it goes, using both CPU cores to overlap reading and computation.
 
 Connect it to a Mac, type a message, and watch the reply appear on its 240 × 240 screen. The display shows each layer and the progress of the current token. The Mac handles text input and drawing letters; the board does the neural network calculations.

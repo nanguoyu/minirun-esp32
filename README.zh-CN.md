@@ -4,6 +4,8 @@
 
 [English](README.md) · [开始使用](docs/getting-started.md) · [硬件接线](docs/hardware.md) · [工作原理](docs/how-it-works.md)
 
+[Minirun](https://minirun.dev) 让设备运行比内存更大的模型。[Mac 和 iPhone 应用](https://github.com/nanguoyu/minirun-app)从 SSD 按需读取模型权重；**这个项目把同样的思路用在 ESP32-S3 和 SD 卡上**，提供板端固件和 Python USB 聊天工具。
+
 Minirun 让 **LFM2.5-230M 直接在 ESP32-S3 上运行**。模型放在 SD 卡里，板子每次读一小块，两个 CPU 核心配合完成读取和计算。
 
 连接 Mac，输入一句话，就能在 240 × 240 屏幕上看它慢慢回答。屏幕会显示当前层和每个 token 的进度。Mac 负责分词、文字排版和 USB 控制，神经网络计算都在板子上完成。

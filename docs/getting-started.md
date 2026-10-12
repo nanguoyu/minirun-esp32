@@ -2,6 +2,8 @@
 
 These steps use a Mac and the ESP32-S3 EYE described in [Hardware](hardware.md). Allow about 1 GB of disk space for dependencies and the two model files. The first build takes a few minutes.
 
+Use the Python tools in this repository to connect the Mac to the board. The [Minirun Mac and iPhone app](https://github.com/nanguoyu/minirun-app) is a separate project that runs models on Apple devices.
+
 ## 1. Set up the computer
 
 Install Apple's command-line tools with `xcode-select --install` if needed. You also need Git, Python 3.12 or later, and CMake. With Homebrew, `brew install python cmake` supplies the latter two.
