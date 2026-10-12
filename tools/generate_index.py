@@ -45,7 +45,7 @@ def index(path):
     return tensors
 
 if __name__=='__main__':
-    pin=json.loads((ROOT/'research/lfm230-artifact.json').read_text())
+    pin=json.loads((ROOT/'models/lfm230-artifact.json').read_text())
     tensors=index(ROOT/'artifacts/model.gguf')
     text='#ifndef MODEL_INDEX_H\n#define MODEL_INDEX_H\n#define MODEL_BYTES '+str(pin['file']['size'])+'\n#define MODEL_SHA256 "'+pin['file']['lfs']['sha256']+'"\nstatic const Tensor tensors[] = {\n'
     for t in tensors:

@@ -5,7 +5,7 @@
 #include <unistd.h>
 int main(int argc, char **argv) {
     assert(argc == 3);
-    char directory[] = "/private/tmp/lfm-kv-model-XXXXXX"; assert(mkdtemp(directory));
+    char directory[] = "/tmp/lfm-kv-model-XXXXXX"; assert(mkdtemp(directory));
     Lfm *a = calloc(1, sizeof(*a)), *b = calloc(1, sizeof(*b));
     LfmBatch *w = calloc(1, sizeof(*w)); LfmKVFile *cache = calloc(1, sizeof(*cache));
     unsigned char *ia = malloc(LFM_IO), *ib = malloc(LFM_IO);

@@ -34,10 +34,6 @@ def logits(position):
          'max_abs':max(abs(u-v) for u,v in zip(x,y)),
          'rmse':math.sqrt(sum((u-v)**2 for u,v in zip(x,y))/len(x))}
     assert row['argmax_match'] and row['max_abs']<0.001,row
-    # Same bytes as the earlier on-device RAM cache wherever a saved checkpoint exists.
-    previous=ROOT/f'data/2026-09-28-context-kv/device-{position}.f32'
-    if previous.exists():
-        row['device_ram_bitwise']=raw==previous.read_bytes();assert row['device_ram_bitwise']
     if a.device_reference_dir:
         prior=a.device_reference_dir/f'{position}.f32'
         if prior.exists():

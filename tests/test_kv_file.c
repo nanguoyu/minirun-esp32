@@ -27,7 +27,7 @@ static float unpack(LfmKV x) {
 }
 static int cancel(void *unused) { (void)unused; return 1; }
 int main(void) {
-    char directory[] = "/private/tmp/lfm-kv-unit-XXXXXX"; assert(mkdtemp(directory));
+    char directory[] = "/tmp/lfm-kv-unit-XXXXXX"; assert(mkdtemp(directory));
     char sentinel[256]; snprintf(sentinel, sizeof(sentinel), "%s/KV0000.TMP", directory);
     FILE *f = fopen(sentinel, "wb"); assert(f); assert(fwrite("keep", 1, 4, f) == 4); fclose(f);
     LfmKVFile *k = calloc(1, sizeof(*k)); Lfm *m = calloc(1, sizeof(*m));

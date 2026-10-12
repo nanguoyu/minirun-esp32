@@ -8,7 +8,7 @@ static uint32_t rng=17;
 static float value(void) { rng=rng*1664525u+1013904223u; return ((int)(rng>>16)-32768)/8192.0f; }
 int main(void) {
     assert(LFM_KV_SHARED);
-    char dir[]="/private/tmp/lfm-shared-XXXXXX"; assert(mkdtemp(dir));
+    char dir[]="/tmp/lfm-shared-XXXXXX"; assert(mkdtemp(dir));
     LfmKVFile *a=calloc(1,sizeof(*a)), *b=calloc(1,sizeof(*b));
     Lfm *ma=calloc(1,sizeof(*ma)), *mb=calloc(1,sizeof(*mb));
     unsigned char *ia=malloc(LFM_IO), *ib=malloc(LFM_IO);

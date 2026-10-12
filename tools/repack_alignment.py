@@ -43,11 +43,14 @@ with part.open('rb') as g:
  for t in ts:
   g.seek(t['offset']);assert hashlib.sha256(g.read(t['bytes'])).hexdigest()==t['sha256']
 report={'source_sha256':verify(src)['file']['lfs']['sha256'],'sha256':hashlib.sha256(part.read_bytes()).hexdigest(),'bytes':part.stat().st_size,'alignment':4096,'tensors':ts}
+verify_aligned(part)
 part.rename(out)
-(root/'research/lfm230-aligned-artifact.json').write_text(json.dumps(report,indent=2)+'\n')
+# The release manifest and tensor index are fixed; setup never edits source files.
 print({k:v for k,v in report.items() if k!='tensors'})
 
 header='#ifndef MODEL_INDEX_ALIGNED_H\n#define MODEL_INDEX_ALIGNED_H\n#define MODEL_BYTES '+str(report['bytes'])+'\n#define MODEL_SHA256 "'+report['sha256']+'"\nstatic const Tensor tensors[] = {\n'
 for t in ts:
  header+='{"%s", %d, %d, %d, %d},\n'%(t['name'],t['offset'],t['dims'][0],t['dims'][1] if len(t['dims'])>1 else 1,t['type'])
-header+='};\n#endif\n';(root/'src/model_index_aligned.h').write_text(header)
+header+='};\n#endif\n'
+if (root/'src/model_index_aligned.h').read_text()!=header:
+ raise RuntimeError('aligned tensor index differs from the pinned artifact')
