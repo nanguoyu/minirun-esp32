@@ -62,10 +62,13 @@ def show(device, text):
 class Progress:
     def __init__(self):
         self.stage = ''
+        self.writing = False
         self.terminal = sys.stderr.isatty()
 
     def set(self, stage):
         self.stage = stage
+        if self.writing:
+            return
         if self.terminal:
             print('\r\033[K' + stage, end='', file=sys.stderr, flush=True)
         else:
@@ -73,12 +76,12 @@ class Progress:
 
     def line(self, line):
         match = re.match(r'LAYER (\d+)', line)
-        if self.terminal and match:
+        if self.terminal and match and not self.writing:
             print(f'\r\033[K{self.stage} · layer {int(match[1]) + 1}/14',
                   end='', file=sys.stderr, flush=True)
 
     def clear(self):
-        if self.terminal:
+        if self.terminal and not self.writing:
             print('\r\033[K', end='', file=sys.stderr, flush=True)
 
 
@@ -126,6 +129,7 @@ def run(args):
             device.command('PREFILL ' + str(head) + ' ' + ' '.join(map(str, chunk)))
             result = device.until('TOKEN ', 900)
         progress.clear()
+        progress.writing = True
         print('Minirun: ', end='', flush=True)
         previous = ''
         reason = 'output limit reached'
@@ -157,7 +161,7 @@ def run(args):
         device.command('PHASE DONE' if reason == 'finished' else 'PHASE OUTPUT LIMIT')
         device.until('PHASE_OK')
         completed = True
-        progress.set(f'{len(generated)} tokens · {time.monotonic() - started:.0f}s · {reason}')
+        print(f'{len(generated)} tokens · {time.monotonic() - started:.0f}s · {reason}', file=sys.stderr)
     except KeyboardInterrupt:
         device.s.write(b'!')
         progress.clear()

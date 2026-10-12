@@ -49,7 +49,7 @@ class ClientTests(unittest.TestCase):
                             'TOKEN ': f'TOKEN position=3 argmax={marker}'} .get(prefix, prefix)
             args = SimpleNamespace(port=None, verbose=False, prompt='Hello!', new_tokens=8,
                                    batch_size=8, reverify=False, mode='PIPELINE')
-            with self.subTest(marker=marker), patch.object(chat.Path if hasattr(chat, 'Path') else type(chat.ROOT), 'exists', return_value=True), patch.object(chat, 'verify'), patch.object(chat, 'tokenize', return_value=[1, 6, 7]), patch.object(chat, 'show'), patch.object(chat, 'Device', Board):
+            with self.subTest(marker=marker), patch.object(Path, 'exists', return_value=True), patch.object(chat, 'verify'), patch.object(chat, 'tokenize', return_value=[1, 6, 7]), patch.object(chat, 'show'), patch.object(chat, 'Device', Board):
                 self.assertEqual(chat.run(args), [])
             self.assertFalse(any(command.startswith('STEP ') for command in commands))
             self.assertIn('KVCLOSE', commands)
