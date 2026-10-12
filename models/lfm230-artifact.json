@@ -1,0 +1,15 @@
+{
+  "repo": "LiquidAI/LFM2.5-230M-GGUF",
+  "revision": "03502067c64ce32ac4fe87b0cec0310a1a13d3e9",
+  "file": {
+    "rfilename": "LFM2.5-230M-QAD-Q4_0.gguf",
+    "blobId": "583b900e58d17b849cebeffd2845a661b24541fe",
+    "size": 149081056,
+    "lfs": {
+      "sha256": "e75f83268de11b2a1bcfab5f3b5c5c0c97569ddbbc0990aad88437e45b8ba292",
+      "size": 149081056,
+      "pointerSize": 134
+    }
+  },
+  "checked_on": "2026-09-28"
+}

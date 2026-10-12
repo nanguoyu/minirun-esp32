@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+build/
+deps/
+artifacts/
+backups/
+logs/
+firmware/sdkconfig
+firmware/sdkconfig.old
+firmware/managed_components/
